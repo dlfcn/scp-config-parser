@@ -17,7 +17,8 @@ import java.util.Scanner;
 public class Main {
     
     private static final boolean PREPREND_CREATE = true;
-    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200312-160116.txt";
+    private static final boolean INCLUDE_HTTP_FACILITY = false;
+    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200312-200045.txt";
     
     //Order 1
     private static final String ROUTE_LIST = "scp-5g-route-list";
@@ -65,8 +66,10 @@ public class Main {
             parseToken(RULE_INSTANCE, lines);
             
             //Parse HTTP Locals then HTTP Peers
-            parseToken(HTTP_LOCAL, lines);
-            parseToken(HTTP_PEER, lines);
+            if (INCLUDE_HTTP_FACILITY) {
+                parseToken(HTTP_LOCAL, lines);
+                parseToken(HTTP_PEER, lines);
+            }
             
             //Parse Network Instances
             parseToken(NETWORK_INSTANCE, lines);
@@ -97,6 +100,7 @@ public class Main {
                         break;
                     } else {
                         sb.append(line);
+                        sb.append(" ");
                     }
                 }
                 configList.add(sb.toString());
