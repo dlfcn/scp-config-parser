@@ -16,9 +16,10 @@ import java.util.Scanner;
  */
 public class Main {
     
-    private static final boolean PREPREND_CREATE = true;
-    private static final boolean INCLUDE_HTTP_FACILITY = false;
-    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200312-200045.txt";
+    private static final boolean TRACE = false;
+    private static final String PREPREND = "create";
+    private static final boolean INCLUDE_HTTP_FACILITY = true;
+    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200423-154410.txt";
     
     //Order 1
     private static final String ROUTE_LIST = "scp-5g-route-list";
@@ -32,7 +33,7 @@ public class Main {
     private static final String HTTP_LOCAL = "http-local";
     private static final String HTTP_PEER = "http-peer";
     //Order 5
-    private static final String NETWORK_INSTANCE = "scp-5g-network-instance";
+    private static final String NETWORK_INSTANCE = "scp-5g-service-instance";
     //Order 6
     private static final String TEST_INSTANCE = "scp-5g-test-instance";
     
@@ -107,14 +108,14 @@ public class Main {
             }
         }
         
-        if (!PREPREND_CREATE) {
+        if (TRACE) {
             System.out.println(String.format("TOKEN [%s]; [%s] configs parsed", 
                     token, Integer.toString(configList.size())));
         }
         
         for (String config : configList) {
-            if (PREPREND_CREATE) {
-                System.out.println("create ".concat(config));
+            if (PREPREND != null) {
+                System.out.println(PREPREND + " " + config);
             } else {
                 System.out.println(config);
             }
