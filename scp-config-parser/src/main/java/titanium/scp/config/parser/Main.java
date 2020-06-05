@@ -18,23 +18,30 @@ public class Main {
     
     private static final boolean TRACE = false;
     private static final String PREPREND = "create";
-    private static final boolean INCLUDE_HTTP_FACILITY = true;
-    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200423-154410.txt";
+    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200603-031212.txt";
     
-    //Order 1
-    private static final String ROUTE_LIST = "scp-5g-route-list";
-    private static final String ROUTE_INSTANCE = "scp-5g-route-instance";
-    //Order 2
-    private static final String ACTION_INSTANCE = "scp-5g-action-instance";
-    //Order 3
-    private static final String RULE_LIST = "scp-5g-rule-list";
-    private static final String RULE_INSTANCE = "scp-5g-rule-instance";
-    //Order 4
+    //HTTP Peers and Locals
     private static final String HTTP_LOCAL = "http-local";
     private static final String HTTP_PEER = "http-peer";
-    //Order 5
+    
+    //NRF-5G Application Schemas
+    private static final String NRF_5G_CONFIGURATION = "nrf-5g-configuration";
+    private static final String NRF_5G_SERVICE_INSTANCE = "nrf-5g-service-instance";
+    
+    //BSF-5G Application Schemas
+    private static final String BSF_5G_CONFIGURATION = "bsf-5g-configuration";
+    private static final String BSF_5G_CACHE_INSTANCE = "bsf-5g-cache-instance";
+    private static final String BSF_5G_SCENARIO_GROUP = "bsf-5g-scenario-group";
+    private static final String BSF_5G_SCENARIO_INSTANCE = "bsf-5g-scenario-instance";
+    private static final String BSF_5G_SERVICE_INSTANCE = "bsf-5g-service-instance";
+    
+    //SCP-5G Application Schemas
+    private static final String ROUTE_LIST = "scp-5g-route-list";
+    private static final String ROUTE_INSTANCE = "scp-5g-route-instance";
+    private static final String ACTION_INSTANCE = "scp-5g-action-instance";
+    private static final String RULE_LIST = "scp-5g-rule-list";
+    private static final String RULE_INSTANCE = "scp-5g-rule-instance";
     private static final String NETWORK_INSTANCE = "scp-5g-service-instance";
-    //Order 6
     private static final String TEST_INSTANCE = "scp-5g-test-instance";
     
     public static void main(String[] args) throws FileNotFoundException {
@@ -55,27 +62,28 @@ public class Main {
                 lines.add(scanner.nextLine());
             }
             
-            //Parse Route Lists then Route Instances
+            System.out.println("\n\n\n");
+            parseToken(HTTP_LOCAL, lines);
+            parseToken(HTTP_PEER, lines);
+            
+            System.out.println("\n\n\n");
+            parseToken(NRF_5G_CONFIGURATION, lines);
+            parseToken(NRF_5G_SERVICE_INSTANCE, lines);
+            
+            System.out.println("\n\n\n");
+            parseToken(BSF_5G_CONFIGURATION, lines);
+            parseToken(BSF_5G_CACHE_INSTANCE, lines);
+            parseToken(BSF_5G_SCENARIO_GROUP, lines);
+            parseToken(BSF_5G_SCENARIO_INSTANCE, lines);
+            parseToken(BSF_5G_SERVICE_INSTANCE, lines);
+            
+            System.out.println("\n\n\n");
             parseToken(ROUTE_LIST, lines);
             parseToken(ROUTE_INSTANCE, lines);
-            
-            //Parse Actions
             parseToken(ACTION_INSTANCE, lines);
-            
-            //Parse Rule Lists then Rule Instances
             parseToken(RULE_LIST, lines);
             parseToken(RULE_INSTANCE, lines);
-            
-            //Parse HTTP Locals then HTTP Peers
-            if (INCLUDE_HTTP_FACILITY) {
-                parseToken(HTTP_LOCAL, lines);
-                parseToken(HTTP_PEER, lines);
-            }
-            
-            //Parse Network Instances
             parseToken(NETWORK_INSTANCE, lines);
-            
-            //Parse Test Instances
             parseToken(TEST_INSTANCE, lines);
         }
     }
@@ -93,13 +101,25 @@ public class Main {
                 sb.setLength(0);
                 sb.append(line);
                 
+                boolean containsClob = false;
+                boolean clobEndFound = true;
+                
                 while (++index < lines.size()) {
                     
                     line = lines.get(index).trim();
                     
-                    if (line.length() == 0) {
+                    if (line.contains("body=<CLOB>") && !line.contains("</CLOB>")) {
+                        containsClob = true;
+                        clobEndFound = false;
+                    }
+                    
+                    if (line.length() == 0 && (!containsClob && clobEndFound)) {
                         break;
                     } else {
+                        if (line.contains("</CLOB>")) {
+                            containsClob = false;
+                            clobEndFound = true;
+                        }
                         sb.append(line);
                         sb.append(" ");
                     }
