@@ -8,6 +8,7 @@ package titanium.scp.config.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -58,7 +59,7 @@ public class Main {
             System.out.println("Error; Cannot read file");
         } else {
             Scanner scanner = new Scanner(file);
-            ArrayList<String> lines = new ArrayList<>();
+            List<String> lines = new ArrayList<>();
             
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
@@ -88,9 +89,9 @@ public class Main {
         }
     }
     
-    private static ArrayList<String> parseToken(String token, ArrayList<String> lines) {
+    private static List<String> parseToken(String token, List<String> lines) {
         
-        ArrayList<String> configList = new ArrayList<>();
+        List<String> configList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         
         for (int index = 0; index < lines.size(); index++) {
