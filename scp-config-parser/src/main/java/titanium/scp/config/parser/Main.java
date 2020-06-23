@@ -16,8 +16,7 @@ import java.util.Scanner;
  */
 public class Main {
     
-    private static final boolean TRACE = false;
-    private static final String PREPREND = "create";
+    private static final boolean CREATE = true;
     private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200615-204951.txt";
     
     //User Defined Dissectors
@@ -67,22 +66,18 @@ public class Main {
             
             parseToken(DISSECTOR, lines);
             
-            System.out.println("\n\n\n");
             parseToken(HTTP_LOCAL, lines);
             parseToken(HTTP_PEER, lines);
             
-            System.out.println("\n\n\n");
             parseToken(NRF_5G_CONFIGURATION, lines);
             parseToken(NRF_5G_SERVICE_INSTANCE, lines);
             
-            System.out.println("\n\n\n");
             parseToken(BSF_5G_CONFIGURATION, lines);
             parseToken(BSF_5G_CACHE_INSTANCE, lines);
             parseToken(BSF_5G_SCENARIO_GROUP, lines);
             parseToken(BSF_5G_SCENARIO_INSTANCE, lines);
             parseToken(BSF_5G_SERVICE_INSTANCE, lines);
             
-            System.out.println("\n\n\n");
             parseToken(ROUTE_LIST, lines);
             parseToken(ROUTE_INSTANCE, lines);
             parseToken(ACTION_INSTANCE, lines);
@@ -133,20 +128,17 @@ public class Main {
             }
         }
         
-        if (TRACE) {
-            System.out.println(String.format("TOKEN [%s]; [%s] configs parsed", 
-                    token, Integer.toString(configList.size())));
-        }
-        
         for (String config : configList) {
-            if (PREPREND != null) {
-                System.out.println(PREPREND + " " + config);
+            if (CREATE) {
+                System.out.println("create " + config);
             } else {
                 System.out.println(config);
             }
         }
-        System.out.println();
         
+        if (!configList.isEmpty()) {
+            System.out.println();
+        }
         return configList;
     }
     
