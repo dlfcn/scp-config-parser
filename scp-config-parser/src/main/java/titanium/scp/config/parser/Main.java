@@ -18,7 +18,10 @@ public class Main {
     
     private static final boolean TRACE = false;
     private static final String PREPREND = "create";
-    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200603-031212.txt";
+    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200615-204951.txt";
+    
+    //User Defined Dissectors
+    private static final String DISSECTOR = "dissector ";
     
     //HTTP Peers and Locals
     private static final String HTTP_LOCAL = "http-local";
@@ -61,6 +64,8 @@ public class Main {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
+            
+            parseToken(DISSECTOR, lines);
             
             System.out.println("\n\n\n");
             parseToken(HTTP_LOCAL, lines);
