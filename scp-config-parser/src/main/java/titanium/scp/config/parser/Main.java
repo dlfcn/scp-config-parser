@@ -38,13 +38,13 @@ public class Main {
     private static final String BSF_5G_SERVICE_INSTANCE = "bsf-5g-service-instance";
     
     //SCP-5G Application Schemas
-    private static final String ROUTE_LIST = "scp-5g-route-list";
-    private static final String ROUTE_INSTANCE = "scp-5g-route-instance";
-    private static final String ACTION_INSTANCE = "scp-5g-action-instance";
-    private static final String RULE_LIST = "scp-5g-rule-list";
-    private static final String RULE_INSTANCE = "scp-5g-rule-instance";
-    private static final String NETWORK_INSTANCE = "scp-5g-service-instance";
-    private static final String TEST_INSTANCE = "scp-5g-test-instance";
+    private static final String SCP_5G_ROUTE_LIST = "scp-5g-route-list";
+    private static final String SCP_5G_ROUTE_INSTANCE = "scp-5g-route-instance";
+    private static final String SCP_5G_ACTION_INSTANCE = "scp-5g-action-instance";
+    private static final String SCP_5G_RULE_LIST = "scp-5g-rule-list";
+    private static final String SCP_5G_RULE_INSTANCE = "scp-5g-rule-instance";
+    private static final String SCP_5G_SERVICE_INSTANCE = "scp-5g-service-instance";
+    private static final String SCP_5G_TEST_INSTANCE = "scp-5g-test-instance";
     
     public static void main(String[] args) throws FileNotFoundException {
         
@@ -78,13 +78,13 @@ public class Main {
             parseToken(BSF_5G_SCENARIO_INSTANCE, lines);
             parseToken(BSF_5G_SERVICE_INSTANCE, lines);
             
-            parseToken(ROUTE_LIST, lines);
-            parseToken(ROUTE_INSTANCE, lines);
-            parseToken(ACTION_INSTANCE, lines);
-            parseToken(RULE_LIST, lines);
-            parseToken(RULE_INSTANCE, lines);
-            parseToken(NETWORK_INSTANCE, lines);
-            parseToken(TEST_INSTANCE, lines);
+            parseToken(SCP_5G_ROUTE_LIST, lines);
+            parseToken(SCP_5G_ROUTE_INSTANCE, lines);
+            parseToken(SCP_5G_ACTION_INSTANCE, lines);
+            parseToken(SCP_5G_RULE_LIST, lines);
+            parseToken(SCP_5G_RULE_INSTANCE, lines);
+            parseToken(SCP_5G_SERVICE_INSTANCE, lines);
+            parseToken(SCP_5G_TEST_INSTANCE, lines);
         }
     }
     
