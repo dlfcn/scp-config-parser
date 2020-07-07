@@ -17,8 +17,9 @@ import java.util.Scanner;
  */
 public class Main {
     
-    private static final boolean CREATE = true;
-    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200615-204951.txt";
+    private static final String CREATE = "create";
+    private static final String UPDATE = "update";
+    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\aschneider-titan-8-20200707-130543.txt";
     
     //User Defined Dissectors
     private static final String DISSECTOR = "dissector ";
@@ -37,6 +38,15 @@ public class Main {
     private static final String BSF_5G_SCENARIO_GROUP = "bsf-5g-scenario-group";
     private static final String BSF_5G_SCENARIO_INSTANCE = "bsf-5g-scenario-instance";
     private static final String BSF_5G_SERVICE_INSTANCE = "bsf-5g-service-instance";
+    
+    //BSF-Diameter Application Schema
+    private static final String BSF_DIAM_CONFIGURATION = "bsf-diameter-configuration";
+    private static final String BSF_DIAM_CACHE_INSTANCE = "bsf-diameter-cache-instance";
+    private static final String BSF_DIAM_SCENARIO_GROUP = "bsf-diameter-scenario-group";
+    private static final String BSF_DIAM_SCENARIO_INSTANCE = "bsf-diameter-scenario-instance";
+    private static final String BSF_DIAM_NO_SESSION_BINDING = "bsf-diameter-no-session-binding";
+    private static final String BSF_DIAM_ROUTE = "bsf-diameter-route";
+    private static final String BSF_DIAM_SERVICE_INSTANCE = "bsf-diameter-service-instance";
     
     //SCP-5G Application Schemas
     private static final String SCP_5G_ROUTE_LIST = "scp-5g-route-list";
@@ -65,31 +75,39 @@ public class Main {
                 lines.add(scanner.nextLine());
             }
             
-            parseToken(DISSECTOR, lines);
+            parseToken(DISSECTOR, lines, CREATE);
             
-            parseToken(HTTP_LOCAL, lines);
-            parseToken(HTTP_PEER, lines);
+            parseToken(HTTP_LOCAL, lines, CREATE);
+            parseToken(HTTP_PEER, lines, CREATE);
             
-            parseToken(NRF_5G_CONFIGURATION, lines);
-            parseToken(NRF_5G_SERVICE_INSTANCE, lines);
+            parseToken(NRF_5G_CONFIGURATION, lines, UPDATE);
+            parseToken(NRF_5G_SERVICE_INSTANCE, lines, CREATE);
             
-            parseToken(BSF_5G_CONFIGURATION, lines);
-            parseToken(BSF_5G_CACHE_INSTANCE, lines);
-            parseToken(BSF_5G_SCENARIO_GROUP, lines);
-            parseToken(BSF_5G_SCENARIO_INSTANCE, lines);
-            parseToken(BSF_5G_SERVICE_INSTANCE, lines);
+            parseToken(BSF_5G_CONFIGURATION, lines, UPDATE);
+            parseToken(BSF_5G_CACHE_INSTANCE, lines, CREATE);
+            parseToken(BSF_5G_SCENARIO_GROUP, lines, CREATE);
+            parseToken(BSF_5G_SCENARIO_INSTANCE, lines, CREATE);
+            parseToken(BSF_5G_SERVICE_INSTANCE, lines, CREATE);
             
-            parseToken(SCP_5G_ROUTE_LIST, lines);
-            parseToken(SCP_5G_ROUTE_INSTANCE, lines);
-            parseToken(SCP_5G_ACTION_INSTANCE, lines);
-            parseToken(SCP_5G_RULE_LIST, lines);
-            parseToken(SCP_5G_RULE_INSTANCE, lines);
-            parseToken(SCP_5G_SERVICE_INSTANCE, lines);
-            parseToken(SCP_5G_TEST_INSTANCE, lines);
+            parseToken(BSF_DIAM_CONFIGURATION, lines, UPDATE);
+            parseToken(BSF_DIAM_CACHE_INSTANCE, lines, CREATE);
+            parseToken(BSF_DIAM_SCENARIO_GROUP, lines, CREATE);
+            parseToken(BSF_DIAM_SCENARIO_INSTANCE, lines, CREATE);
+            parseToken(BSF_DIAM_NO_SESSION_BINDING, lines, UPDATE);
+            parseToken(BSF_DIAM_ROUTE, lines, UPDATE);
+            parseToken(BSF_DIAM_SERVICE_INSTANCE, lines, CREATE);
+            
+            parseToken(SCP_5G_ROUTE_LIST, lines, CREATE);
+            parseToken(SCP_5G_ROUTE_INSTANCE, lines, CREATE);
+            parseToken(SCP_5G_ACTION_INSTANCE, lines, CREATE);
+            parseToken(SCP_5G_RULE_LIST, lines, CREATE);
+            parseToken(SCP_5G_RULE_INSTANCE, lines, CREATE);
+            parseToken(SCP_5G_SERVICE_INSTANCE, lines, CREATE);
+            parseToken(SCP_5G_TEST_INSTANCE, lines, CREATE);
         }
     }
     
-    private static List<String> parseToken(String token, List<String> lines) {
+    private static List<String> parseToken(String token, List<String> lines, String prefix) {
         
         List<String> configList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
@@ -130,11 +148,7 @@ public class Main {
         }
         
         for (String config : configList) {
-            if (CREATE) {
-                System.out.println("create " + config);
-            } else {
-                System.out.println(config);
-            }
+            System.out.println(prefix + " " + config);
         }
         
         if (!configList.isEmpty()) {
