@@ -19,7 +19,7 @@ public class Main {
     
     private static final String CREATE = "create";
     private static final String UPDATE = "update";
-    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\aschneider-titan-8-20200707-130543.txt";
+    private static final String FILE_LOCATION = "C:\\Users\\dfontana\\Downloads\\mboutin-8.0.0-190-20200817-202836.txt";
     
     //User Defined Dissectors
     private static final String DISSECTOR = "dissector ";
@@ -49,13 +49,16 @@ public class Main {
     private static final String BSF_DIAM_SERVICE_INSTANCE = "bsf-diameter-service-instance";
     
     //SCP-5G Application Schemas
+    private static final String SCP_5G_LOCAL = "scp-5g-local-instance";
     private static final String SCP_5G_ROUTE_LIST = "scp-5g-route-list";
     private static final String SCP_5G_ROUTE_INSTANCE = "scp-5g-route-instance";
     private static final String SCP_5G_ACTION_INSTANCE = "scp-5g-action-instance";
     private static final String SCP_5G_RULE_LIST = "scp-5g-rule-list";
     private static final String SCP_5G_RULE_INSTANCE = "scp-5g-rule-instance";
     private static final String SCP_5G_SERVICE_INSTANCE = "scp-5g-service-instance";
-    private static final String SCP_5G_TEST_INSTANCE = "scp-5g-test-instance";
+    private static final String SCP_5G_TRANS_LIST = "scp-5g-transformation-list";
+    private static final String SCP_5G_TRANS_INST = "scp-5g-transformation-instance";
+    private static final String SCP_5G_TEST_INSTANCE = "scp-5g-test-instance"; //deprecated
     
     public static void main(String[] args) throws FileNotFoundException {
         
@@ -97,12 +100,15 @@ public class Main {
             parseToken(BSF_DIAM_ROUTE, lines, UPDATE);
             parseToken(BSF_DIAM_SERVICE_INSTANCE, lines, CREATE);
             
+            parseToken(SCP_5G_LOCAL, lines, CREATE);
             parseToken(SCP_5G_ROUTE_LIST, lines, CREATE);
             parseToken(SCP_5G_ROUTE_INSTANCE, lines, CREATE);
             parseToken(SCP_5G_ACTION_INSTANCE, lines, CREATE);
             parseToken(SCP_5G_RULE_LIST, lines, CREATE);
             parseToken(SCP_5G_RULE_INSTANCE, lines, CREATE);
             parseToken(SCP_5G_SERVICE_INSTANCE, lines, CREATE);
+            parseToken(SCP_5G_TRANS_LIST, lines, CREATE);
+            parseToken(SCP_5G_TRANS_INST, lines, CREATE);
             parseToken(SCP_5G_TEST_INSTANCE, lines, CREATE);
         }
     }
