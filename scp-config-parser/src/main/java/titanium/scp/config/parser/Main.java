@@ -30,15 +30,17 @@ public class Main {
     
     //NRF-5G Application Schemas
     private static final String NRF_5G_CONFIGURATION = "nrf-5g-configuration";
+    private static final String NRF_5G_LOCAL_INSTANCES = "nrf-5g-local-instance";
     private static final String NRF_5G_SERVICE_INSTANCE = "nrf-5g-service-instance";
     
     //BSF-5G Application Schemas
     private static final String BSF_5G_CONFIGURATION = "bsf-5g-configuration";
+    private static final String BSF_5G_LOCAL_INSTANCES = "bsf-5g-local-instance";
     private static final String BSF_5G_CACHE_INSTANCE = "bsf-5g-cache-instance";
     private static final String BSF_5G_SCENARIO_GROUP = "bsf-5g-scenario-group";
     private static final String BSF_5G_SCENARIO_INSTANCE = "bsf-5g-scenario-instance";
     private static final String BSF_5G_SERVICE_INSTANCE = "bsf-5g-service-instance";
-    
+
     //BSF-Diameter Application Schema
     private static final String BSF_DIAM_CONFIGURATION = "bsf-diameter-configuration";
     private static final String BSF_DIAM_CACHE_INSTANCE = "bsf-diameter-cache-instance";
@@ -49,6 +51,8 @@ public class Main {
     private static final String BSF_DIAM_SERVICE_INSTANCE = "bsf-diameter-service-instance";
     
     //SCP-5G Application Schemas
+    private static final String SCP_5G_CONFIGURATION = "scp-5g-configuration";
+    private static final String SCP_5G_LIST = "scp-5g-configuration";
     private static final String SCP_5G_LOCAL = "scp-5g-local-instance";
     private static final String SCP_5G_ROUTE_LIST = "scp-5g-route-list";
     private static final String SCP_5G_ROUTE_INSTANCE = "scp-5g-route-instance";
@@ -78,20 +82,27 @@ public class Main {
                 lines.add(scanner.nextLine());
             }
             
+            // Dissectors
             parseToken(DISSECTOR, lines, CREATE);
             
+            // TITAN 8 HTTP Facility
             parseToken(HTTP_LOCAL, lines, CREATE);
             parseToken(HTTP_PEER, lines, CREATE);
             
+            // NRF
             parseToken(NRF_5G_CONFIGURATION, lines, UPDATE);
+            parseToken(NRF_5G_LOCAL_INSTANCES, lines, CREATE);
             parseToken(NRF_5G_SERVICE_INSTANCE, lines, CREATE);
             
+            // BSF
             parseToken(BSF_5G_CONFIGURATION, lines, UPDATE);
+            parseToken(BSF_5G_LOCAL_INSTANCES, lines, CREATE);
             parseToken(BSF_5G_CACHE_INSTANCE, lines, CREATE);
             parseToken(BSF_5G_SCENARIO_GROUP, lines, CREATE);
             parseToken(BSF_5G_SCENARIO_INSTANCE, lines, CREATE);
             parseToken(BSF_5G_SERVICE_INSTANCE, lines, CREATE);
             
+            // BSF (Diameter)
             parseToken(BSF_DIAM_CONFIGURATION, lines, UPDATE);
             parseToken(BSF_DIAM_CACHE_INSTANCE, lines, CREATE);
             parseToken(BSF_DIAM_SCENARIO_GROUP, lines, CREATE);
@@ -100,6 +111,9 @@ public class Main {
             parseToken(BSF_DIAM_ROUTE, lines, UPDATE);
             parseToken(BSF_DIAM_SERVICE_INSTANCE, lines, CREATE);
             
+            // SCP
+            parseToken(SCP_5G_CONFIGURATION, lines, UPDATE);
+            parseToken(SCP_5G_LIST, lines, CREATE);
             parseToken(SCP_5G_LOCAL, lines, CREATE);
             parseToken(SCP_5G_ROUTE_LIST, lines, CREATE);
             parseToken(SCP_5G_ROUTE_INSTANCE, lines, CREATE);
